@@ -152,7 +152,7 @@ class Device(models.Model):
             if custom_cert is None:
                 custom_cert = self._getApnCertPath()
             c = ssl.wrap_socket(s,
-                                ssl_version=ssl.PROTOCOL_SSLv3,
+                                ssl_version=ssl.PROTOCOL_TLSv1,
                                 certfile=custom_cert)
             c.connect((self._getApnHostName(), 2195))
 
@@ -222,7 +222,7 @@ def sendMessageToPhoneGroup(devices_list, alert, badge=0, sound="chime", content
     while (currentChunk <= math.ceil(devices_list.count() / chunkSize)):
         s = socket()
         c = ssl.wrap_socket(s,
-                            ssl_version=ssl.PROTOCOL_SSLv3,
+                            ssl_version=ssl.PROTOCOL_TLSv1,
                             certfile=custom_cert)
         c.connect((host_name, 2195))
         
@@ -262,7 +262,7 @@ def doFeedbackLoop(sandbox = False):
 
     s = socket()
     c = ssl.wrap_socket(s,
-                        ssl_version=ssl.PROTOCOL_SSLv3,
+                        ssl_version=ssl.PROTOCOL_TLSv1,
                         certfile=settings.APN_LIVE_PUSH_CERT)
     c.connect((settings.APN_FEEDBACK_HOST, 2196))
 
