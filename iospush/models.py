@@ -179,7 +179,9 @@ class Device(models.Model):
                     elif response_status == 7:
                         raise Exception('Invalid payload size')
                     elif response_status == 8:
-                        raise Exception('Invalid token')
+                        self.failed = True
+                        self.save()
+                        # raise Exception('Invalid token')
                     else:
                         raise Exception('None (unknown)')
         except ssl.SSLError as e:
@@ -276,3 +278,6 @@ def doFeedbackLoop(sandbox = False):
             full_buf += tmp
         
     c.close()
+
+
+class
