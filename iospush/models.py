@@ -278,6 +278,3 @@ def doFeedbackLoop(sandbox = False):
             full_buf += tmp
         
     c.close()
-
-
-class
